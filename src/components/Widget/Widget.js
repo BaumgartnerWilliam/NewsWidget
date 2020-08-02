@@ -29,16 +29,25 @@ Widget.Footer = ({ children }) => (
 );
 
 Widget.propTypes = {
-  children: PropTypes.element
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element)
+  ])
 };
 
 Widget.Header.propTypes = {
   title: PropTypes.string.isRequired,
-  children: PropTypes.element
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element)
+  ])
 };
 
 Widget.Body.propTypes = {
-  children: PropTypes.element
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element)
+  ])
 };
 
 export default Widget;
