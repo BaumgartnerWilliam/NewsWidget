@@ -3,10 +3,10 @@ import { render, wait, fireEvent } from '@testing-library/react';
 import App from './App';
 
 describe('App component', () => {
-  const filterSelector = 'select';
+  const filterSelector = 'news-filter';
   const articleSelector = 'article';
   const articleListSelector = 'article-list';
-  const showMoreSelector = 'show-more';
+  const showMoreSelector = 'load-more-news';
 
   it('renders withough crashing', () => {
     const { container } = render(<App />);
@@ -17,7 +17,7 @@ describe('App component', () => {
   it('renders the news widget', () => {
     const { getByLabelText } = render(<App />);
 
-    getByLabelText('widget');
+    getByLabelText('news-widget');
   });
 
   it('loads 5 unfiltered articles', () => {
@@ -40,7 +40,7 @@ describe('App component', () => {
   });
 
   it('filters the articles upon changing it', async () => {
-    const filterName = 'select';
+    const filterName = 'value-1';
     const unfilterName = '';
     const { getByLabelText, getAllByLabelText } = render(<App />);
 

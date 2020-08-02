@@ -6,12 +6,13 @@ const onSelectChange = fn => ({ target: { value } }) => {
   return false;
 };
 
-const Select = ({ onChange, options = [], defaultValue }) =>
+const Select = ({ onChange, options = [], defaultValue, ...props }) =>
   options && options.length ? (
     <select
       aria-label="select"
       onChange={onSelectChange(onChange)}
-      defaultValue={defaultValue}>
+      defaultValue={defaultValue}
+      {...props}>
       {options.map(({ value, text }) => (
         <option aria-label="option" key={value} value={value}>
           {text}

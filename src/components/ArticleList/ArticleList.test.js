@@ -1,19 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import ArticleList from './ArticleList';
-
-const createArticle = n =>
-  Array(n)
-    .fill(0)
-    .map((_, idx) => ({
-      id: String(idx),
-      title: `my super title ${idx}`,
-      source: {
-        id: idx % 2 === 0 ? null : `id-${idx}`,
-        name: `name-${idx}`
-      },
-      publishedAt: '2020-01-01T08:00:00Z'
-    }));
+import { createArticle } from '../../mocks';
 
 describe('ArticleList component', () => {
   const articleListSelector = 'article-list';

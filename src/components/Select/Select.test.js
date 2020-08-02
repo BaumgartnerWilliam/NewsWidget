@@ -1,14 +1,7 @@
 import React from 'react';
 import Select from './Select';
 import { render, fireEvent, wait } from '@testing-library/react';
-
-const createOptions = n =>
-  Array(n)
-    .fill(0)
-    .map((_, idx) => ({
-      value: `value-${idx}`,
-      text: `text-${idx}`
-    }));
+import { createFilterOptions as createOptions } from '../../mocks';
 
 describe('select', () => {
   const SelectSelector = 'select';

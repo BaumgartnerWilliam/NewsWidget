@@ -3,8 +3,8 @@ import './Widget.css';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Widget = ({ children }) => (
-  <section aria-label="widget" className="widget">
+const Widget = ({ children, ...props }) => (
+  <section aria-label="widget" className="widget" {...props}>
     {children}
   </section>
 );
@@ -16,14 +16,14 @@ Widget.Header = ({ title, children }) => (
   </div>
 );
 
-Widget.Body = ({ children }) => (
-  <div aria-label="widget-body" className="widget--body">
+Widget.Body = ({ children, ...props }) => (
+  <div aria-label="widget-body" className="widget--body" {...props}>
     {children}
   </div>
 );
 
-Widget.Footer = ({ children }) => (
-  <div aria-label="widget-footer" className="widget--footer mt-2">
+Widget.Footer = ({ children, ...props }) => (
+  <div aria-label="widget-footer" className="widget--footer mt-2" {...props}>
     {children}
   </div>
 );
