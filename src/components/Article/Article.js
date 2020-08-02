@@ -1,9 +1,12 @@
+import './Article.css';
+
 import React from 'react';
 import PropTypes from 'prop-types';
 
+
 const Article = ({ title, date, editor }) => (
-  <>
-    <h3 aria-label="title" className="capitalize medium-text">
+  <article aria-label="article" className="article">
+    <h3 aria-label="title" className="title capitalize medium-text">
       {title}
     </h3>
     <p className="mt-1">
@@ -14,7 +17,7 @@ const Article = ({ title, date, editor }) => (
         {editor}
       </span>
     </p>
-  </>
+  </article>
 );
 
 Article.propTypes = {

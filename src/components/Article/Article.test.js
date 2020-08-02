@@ -9,7 +9,8 @@ describe('Article component', () => {
       date: new Date(),
       editor: 'editor name'
     };
-    const { container } = render(<Article {...props} />);
+    const { container, getByLabelText } = render(<Article {...props} />);
+    getByLabelText('article');
     expect(container).toBeInTheDocument();
   });
 
