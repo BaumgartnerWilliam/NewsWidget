@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Article from './components/Article/Article';
+import ArticleList from './components/ArticleList/ArticleList';
 import Select from './components/Select/Select';
 import Widget from './components/Widget/Widget';
 import './App.css';
@@ -12,18 +12,15 @@ const mockOptions = [
 const createArticle = n =>
   Array(n)
     .fill(0)
-    .map((_, idx) => (
-      <div key={idx}>
-        <li className="article-list--item mt-2">
-          <Article
-            title={'something happened'}
-            date={new Date()}
-            editor={'my name'}
-          />
-        </li>
-        <hr />
-      </div>
-    ));
+    .map((_, idx) => ({
+      id: String(idx),
+      title: `my super title ${idx}`,
+      source: {
+        id: idx % 2 === 0 ? null : `id-${idx}`,
+        name: `name-${idx}`
+      },
+      publishedAt: '2020-01-01T08:00:00Z'
+    }));
 
 function App() {
   const [articles, setNumberOfArticles] = useState(5);
@@ -44,9 +41,7 @@ function App() {
             />
           </Widget.Header>
           <Widget.Body>
-            <ul aria-label="article-list" className="article-list">
-              {createArticle(articles)}
-            </ul>
+            <ArticleList articles={createArticle(articles)}/>
           </Widget.Body>
           <Widget.Footer>
             <button

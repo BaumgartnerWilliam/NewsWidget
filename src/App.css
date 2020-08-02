@@ -37,15 +37,6 @@
   }
 }
 
-.article-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.article-list hr {
-  color: white;
-}
 .small-text {
   font-size: 0.8rem;
 }
