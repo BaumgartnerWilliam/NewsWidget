@@ -13,7 +13,7 @@ describe('Article component', () => {
     expect(container).toBeInTheDocument();
   });
 
-  it('should the title, the date and the editor properly', () => {
+  it('should render the title, the date and the editor properly', () => {
     const props = {
       title: 'my title',
       date: new Date(),
