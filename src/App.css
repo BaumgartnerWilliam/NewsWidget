@@ -43,15 +43,9 @@
   list-style: none;
 }
 
-
 .article-list hr {
   color: white;
 }
-
-.article-list--item > * {
-  margin: 0;
-}
-
 .small-text {
   font-size: 0.8rem;
 }
