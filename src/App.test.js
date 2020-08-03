@@ -1,7 +1,8 @@
 import React from 'react';
 import { render, wait, fireEvent } from '@testing-library/react';
-import { store } from './context/store';
-import { createArticle, createFilterOptions } from './mocks';
+import { store, StateProvider } from './context/store';
+import { createArticleFilter } from './services';
+import { createArticle } from './mocks';
 import App from './App';
 
 const renderApp = (state, dispatch) => (
@@ -18,20 +19,17 @@ describe('App component', () => {
 
   let state;
   let dispatch;
-  const filters = createFilterOptions(3);
-  filters.push({
-    value: '',
-    text: 'filter by something'
-  });
 
   beforeEach(() => {
+    const articles = createArticle(5);
+    const filters = createArticleFilter(articles);
+
     dispatch = jest.fn();
     state = {
-      articles: {
-        data: createArticle(5),
-        filters
-      }
+      articles,
+      filters
     };
+    jest.clearAllMocks();
   });
 
   it('renders withough crashing', () => {
@@ -61,20 +59,23 @@ describe('App component', () => {
       renderApp(state, dispatch)
     );
 
-    expect(dispatch).toHaveBeenCalledWith({ type: 'fetch_articles_success' });
+    expect(dispatch).toHaveBeenCalledWith(expect.objectContaining({
+      type: 'NEWS-WIDGET_FETCH_SUCCESS'
+    }));
     expect(getAllByLabelText(articleSelector).length).toBe(5);
 
     await wait(() => {
       fireEvent.click(getByLabelText(showMoreSelector));
     });
 
-    expect(dispatch).toHaveBeenCalledWith({ type: 'load_more_articles' });
+    expect(dispatch).toHaveBeenCalledWith({ type: 'NEWS-WIDGET_LOAD_MORE' });
   });
 
   it('filters the articles upon changing it', async () => {
-    const filterName = 'value-1';
+    const filterKeys = Object.keys(state.filters);
+    const filterName = state.filters[filterKeys[0]].value
     const unfilterName = '';
-    const { getByLabelText, getAllByLabelText, rerender } = render(
+    const { getByLabelText, getAllByLabelText } = render(
       renderApp(state, dispatch)
     );
 
@@ -88,7 +89,7 @@ describe('App component', () => {
 
     expect(getByLabelText(filterSelector).value).toBe(filterName);
     expect(dispatch).toHaveBeenCalledWith({
-      type: 'filter_articles',
+      type: 'NEWS-WIDGET_FILTER_ARTICLES',
       filter: filterName
     });
 
@@ -100,8 +101,8 @@ describe('App component', () => {
 
     expect(getByLabelText(filterSelector).value).toBe(unfilterName);
     expect(dispatch).toHaveBeenCalledWith({
-      type: 'filter_articles',
-      filter: filterName
+      type: 'NEWS-WIDGET_FILTER_ARTICLES',
+      filter: unfilterName
     });
   });
-5});
+});
