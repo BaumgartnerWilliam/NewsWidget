@@ -11,7 +11,10 @@ describe('buildUrl', () => {
   it('should append searchParams', () => {
     searchParams = {
       key1: 'value1',
-      key2: 'value2'
+      key2: 'value2',
+      noShow: undefined,
+      notAppended: false,
+      notAppended2: ''
     };
 
     expect(buildUrl(url, searchParams)).toBe(
