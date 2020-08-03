@@ -1,24 +1,37 @@
 import './App.css';
 
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useCallback, useState } from 'react';
 import NewsWidget from './components/NewsWidget/NewsWidget';
 import { NEWS_WIDGET } from './constants';
-import { createArticle } from './mocks';
+import { fetchTopHeadLines } from './api';
 import { store } from './context/store';
 
 function App() {
   const { state, dispatch } = useContext(store);
   const onFilterChange = filter =>
     dispatch({ type: NEWS_WIDGET.FILTER_ARTICLES, filter });
-  const onLoadMoreArticles = () =>
-    dispatch({ type: NEWS_WIDGET.LOAD_MORE_ARTICLES });
 
-  useEffect(() => {
-    dispatch({
-      type: NEWS_WIDGET.FETCH_ARTICLES_SUCCES,
-      data: createArticle(5)
+  const [page, setPage] = useState(1);
+  const onLoadMoreArticles = async () => {
+    const nextPage = page + 1;
+    // todo: handle error case
+    const { articles } = await fetchTopHeadLines({ page: nextPage });
+
+    setPage(nextPage);
+    dispatch({ type: NEWS_WIDGET.LOAD_MORE_ARTICLES, data: articles });
+  };
+
+  const onPageLoad = useCallback(() => {
+    // todo: handle error case
+    fetchTopHeadLines().then(({ articles }) => {
+      dispatch({
+        type: NEWS_WIDGET.FETCH_ARTICLES_SUCCES,
+        data: articles
+      });
     });
   }, [dispatch]);
+
+  useEffect(onPageLoad, [dispatch]);
 
   const filterOptions = Object.values(state.filters || {});
   const defaultFilter = {

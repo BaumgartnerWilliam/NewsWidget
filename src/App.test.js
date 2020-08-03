@@ -3,7 +3,10 @@ import { render, wait, fireEvent } from '@testing-library/react';
 import { store, StateProvider } from './context/store';
 import { createArticleFilter } from './services';
 import { createArticle } from './mocks';
+import { fetchTopHeadLines } from './api';
 import App from './App';
+
+jest.mock('./api');
 
 const renderApp = (state, dispatch) => (
   <store.Provider value={{ state, dispatch }}>
@@ -29,6 +32,9 @@ describe('App component', () => {
       articles,
       filters
     };
+
+    fetchTopHeadLines.mockImplementation(() => Promise.resolve({ articles }));
+
     jest.clearAllMocks();
   });
 
@@ -59,21 +65,22 @@ describe('App component', () => {
       renderApp(state, dispatch)
     );
 
-    expect(dispatch).toHaveBeenCalledWith(expect.objectContaining({
-      type: 'NEWS-WIDGET_FETCH_SUCCESS'
-    }));
+    expect(fetchTopHeadLines).toHaveBeenCalled();
     expect(getAllByLabelText(articleSelector).length).toBe(5);
 
     await wait(() => {
       fireEvent.click(getByLabelText(showMoreSelector));
     });
 
-    expect(dispatch).toHaveBeenCalledWith({ type: 'NEWS-WIDGET_LOAD_MORE' });
+    expect(fetchTopHeadLines).toHaveBeenCalledWith({ page: 2 });
+    expect(dispatch).toHaveBeenCalledWith(
+      expect.objectContaining({ type: 'NEWS-WIDGET_LOAD_MORE' })
+    );
   });
 
   it('filters the articles upon changing it', async () => {
     const filterKeys = Object.keys(state.filters);
-    const filterName = state.filters[filterKeys[0]].value
+    const filterName = filterKeys[0];
     const unfilterName = '';
     const { getByLabelText, getAllByLabelText } = render(
       renderApp(state, dispatch)
