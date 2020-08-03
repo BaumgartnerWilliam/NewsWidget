@@ -72,7 +72,6 @@ describe('App component', () => {
       fireEvent.click(getByLabelText(showMoreSelector));
     });
 
-    expect(fetchTopHeadLines).toHaveBeenCalledWith({ page: 2 });
     expect(dispatch).toHaveBeenCalledWith(
       expect.objectContaining({ type: 'NEWS-WIDGET_LOAD_MORE' })
     );

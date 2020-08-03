@@ -15,7 +15,12 @@ function App() {
   const onLoadMoreArticles = async () => {
     const nextPage = page + 1;
     // todo: handle error case
-    const { articles } = await fetchTopHeadLines({ page: nextPage });
+    const params = {
+      // when querying with sources, country has to be unset
+      country: state.selectedFilter ? '' : 'us',
+      sources: state.selectedFilter || '',
+    };
+    const { articles } = await fetchTopHeadLines(params);
 
     setPage(nextPage);
     dispatch({ type: NEWS_WIDGET.LOAD_MORE_ARTICLES, data: articles });
