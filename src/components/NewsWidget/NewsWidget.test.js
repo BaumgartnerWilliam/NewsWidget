@@ -22,7 +22,7 @@ describe('NewsWidget component', () => {
     getByText('News');
   });
 
-  it('display a news widget with filters and articles', () => {
+  it('displays a news widget with filters and articles', () => {
     const { getByLabelText, getByText } = render(
       <NewsWidget
         filterOptions={createFilterOptions(5)}
