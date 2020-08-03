@@ -42,7 +42,6 @@ NewsWidget.propTypes = {
   ),
   articles: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       publishedAt: PropTypes.string.isRequired,
       source: PropTypes.shape({
