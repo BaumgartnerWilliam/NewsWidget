@@ -1,3 +1,4 @@
+import { buildUrl } from '../services';
 const api_key = '34e2ebc5674443dea02a218f48db1475';
 
 const NewsApiUrl = 'https://newsapi.org/v2/top-headlines';
