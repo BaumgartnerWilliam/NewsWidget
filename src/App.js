@@ -20,7 +20,8 @@ function App() {
     const params = {
       // when querying with sources, country has to be unset
       country: state.selectedFilter ? '' : 'us',
-      sources: state.selectedFilter || '',
+      page: nextPage,
+      sources: state.selectedFilter || ''
     };
     const { articles } = await fetchTopHeadLines(params);
 
@@ -55,6 +56,7 @@ function App() {
           onFilterChange={onFilterChange}
           onLoadMoreArticles={onLoadMoreArticles}
           isLoading={state.isLoading}
+          hideShowMore={(state.selectedFilter && true) || false}
         />
       </header>
     </div>

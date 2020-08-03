@@ -9,6 +9,7 @@ const NewsWidget = ({
   articles,
   onLoadMoreArticles,
   isLoading,
+  hideShowMore,
   onFilterChange
 }) => (
   <Widget aria-label="news-widget">
@@ -24,13 +25,15 @@ const NewsWidget = ({
       <ArticleList articles={articles} />
     </Widget.Body>
     <Widget.Footer aria-label="news-footer">
-      <button
-        aria-label="load-more-news"
-        disabled={isLoading}
-        onClick={onLoadMoreArticles}
-        className="btn capitalize p-1">
-        show more
-      </button>
+      {!hideShowMore && (
+        <button
+          aria-label="load-more-news"
+          disabled={isLoading}
+          onClick={onLoadMoreArticles}
+          className="btn capitalize p-1">
+          show more
+        </button>
+      )}
     </Widget.Footer>
   </Widget>
 );
@@ -54,7 +57,8 @@ NewsWidget.propTypes = {
   ),
   onLoadMoreArticles: PropTypes.func,
   onFilterChange: PropTypes.func,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
+  hideShowMore: PropTypes.bool
 };
 
 export default memo(NewsWidget);

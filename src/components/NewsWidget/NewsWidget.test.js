@@ -81,4 +81,12 @@ describe('NewsWidget component', () => {
 
     expect(getByLabelText(ShowMoreSelector).disabled).toBe(true);
   });
+
+  it('hides showMore button', () => {
+    const { container } = render(<NewsWidget hideShowMore={true} />);
+
+    expect(container.querySelector(`[aria-label=${ShowMoreSelector}]`)).toBe(
+      null
+    );
+  });
 });
