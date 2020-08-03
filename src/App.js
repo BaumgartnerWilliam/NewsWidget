@@ -1,28 +1,29 @@
-import React, { useState } from 'react';
-import NewsWidget from './components/NewsWidget/NewsWidget';
-import { createArticle, createFilterOptions } from './mocks';
 import './App.css';
 
-function App() {
-  const [articles, setNumberOfArticles] = useState(5);
-  const filters = createFilterOptions(3);
-  filters.push({
-    value: '',
-    text: 'filter by something'
-  });
+import React, { useContext, useEffect } from 'react';
+import NewsWidget from './components/NewsWidget/NewsWidget';
+import { NEWS_WIDGET } from './constants';
+import { store } from './context/store';
 
-  const addArticles = () => setNumberOfArticles(articles + 5);
-  const filterArticles = value =>
-    value ? setNumberOfArticles(2) : setNumberOfArticles(5);
+function App() {
+  const { state, dispatch } = useContext(store);
+  const onFilterChange = filter =>
+    dispatch({ type: NEWS_WIDGET.FILTER_ARTICLES, filter });
+  const onLoadMoreArticles = () =>
+    dispatch({ type: NEWS_WIDGET.LOAD_MORE_ARTICLES });
+
+  useEffect(() => {
+    dispatch({ type: NEWS_WIDGET.FETCH_ARTICLES_SUCCES });
+  }, [dispatch]);
 
   return (
     <div className="App">
       <header className="App-header">
         <NewsWidget
-          filterOptions={filters}
-          articles={createArticle(articles)}
-          onFilterChange={filterArticles}
-          onLoadMoreArticles={addArticles}
+          filterOptions={state.articles?.filters}
+          articles={state.articles?.data}
+          onFilterChange={onFilterChange}
+          onLoadMoreArticles={onLoadMoreArticles}
         />
       </header>
     </div>

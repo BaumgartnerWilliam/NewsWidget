@@ -1,6 +1,6 @@
 import { NEWS_WIDGET } from '../constants';
 import { createArticleFilter } from '../services';
-import { createArticle, createFilterOptions } from '../mocks';
+import { createArticle } from '../mocks';
 
 const {
   FETCH_ARTICLES,
