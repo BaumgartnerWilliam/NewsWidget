@@ -1,7 +1,7 @@
 /**
  * @param Articles[] - list of articles
  * @param filtersMap - map of filters to be appended
- * @return FilterOptions
+ * @return FilterOptions - [{value, text}]
  */
 export const createArticleFilter = (articles = [], filtersMap = {}) => {
   const filters = filtersMap || {};
@@ -15,7 +15,7 @@ export const createArticleFilter = (articles = [], filtersMap = {}) => {
     if (!filters[key]) {
       filters[key] = {
         value: key,
-        name
+        text: name
       };
     }
   }

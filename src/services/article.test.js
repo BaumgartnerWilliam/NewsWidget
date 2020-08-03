@@ -13,6 +13,14 @@ describe('createArticleFilter', () => {
     const filters = createArticleFilter(articles);
 
     expect(Object.values(filters).length).toBe(5);
+    expect(Object.values(filters)).toStrictEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          value: 'name-0',
+          text: 'name-0'
+        })
+      ])
+    );
   });
 
   it('should return 3 unique keys', () => {
@@ -28,8 +36,8 @@ describe('createArticleFilter', () => {
 
   it('should append to the existing filtersMap', () => {
     const filtersMap = {
-      key1: { value: 'key1', name: 'name1' },
-      key2: { value: 'key2', name: 'name2' }
+      key1: { value: 'key1', text: 'name1' },
+      key2: { value: 'key2', text: 'name2' }
     };
 
     const articles = createArticle(5);
