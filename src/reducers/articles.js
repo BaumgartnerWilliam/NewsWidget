@@ -1,6 +1,5 @@
 import { NEWS_WIDGET } from '../constants';
 import { createArticleFilter } from '../services';
-import { createArticle } from '../mocks';
 
 const {
   FETCH_ARTICLES,
@@ -8,6 +7,13 @@ const {
   LOAD_MORE_ARTICLES,
   FILTER_ARTICLES
 } = NEWS_WIDGET;
+
+const filterByNameOrId = (articles, filter) =>
+  filter
+    ? articles.filter(
+        ({ source: { id, name } }) => (id && id === filter) || name === filter
+      )
+    : articles;
 
 const ArticleReducer = (state, { type, filter, data }) => {
   switch (type) {
@@ -20,19 +26,19 @@ const ArticleReducer = (state, { type, filter, data }) => {
       const { allArticles = [] } = state;
       return {
         ...state,
-        articles: filter
-          ? allArticles.filter(
-              ({ source: { id, name } }) =>
-                (id && id === filter) || name === filter
-            )
-          : allArticles
+        articles: filterByNameOrId(allArticles, filter),
+        selectedFilter: filter
       };
     }
     case LOAD_MORE_ARTICLES: {
-      const { allArticles = [] } = state;
+      let { allArticles = [], selectedFilter, filters } = state;
+      allArticles = [...allArticles, ...data];
+
       return {
         ...state,
-        allArticles: [...allArticles, ...createArticle(5)]
+        allArticles,
+        articles: filterByNameOrId(allArticles, selectedFilter),
+        filters: createArticleFilter(allArticles, filters)
       };
     }
     case FETCH_ARTICLES_SUCCES: {
