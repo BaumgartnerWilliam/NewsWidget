@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import Widget from '../Widget/Widget';
 import Select from '../Select/Select';
@@ -54,4 +54,4 @@ NewsWidget.propTypes = {
   onFilterChange: PropTypes.func
 };
 
-export default NewsWidget;
+export default memo(NewsWidget);
