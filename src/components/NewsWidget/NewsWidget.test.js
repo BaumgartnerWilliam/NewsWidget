@@ -20,6 +20,7 @@ describe('NewsWidget component', () => {
 
     getByLabelText(NewsWidgetSelector);
     getByText('News');
+    expect(getByLabelText(ShowMoreSelector).disabled).toBe(false);
   });
 
   it('displays a news widget with filters and articles', () => {
@@ -73,5 +74,11 @@ describe('NewsWidget component', () => {
     });
 
     expect(onLoadMoreArticles).toHaveBeenCalled();
+  });
+
+  it('disables showMore button when isLoading is active', () => {
+    const { getByLabelText } = render(<NewsWidget isLoading={true} />);
+
+    expect(getByLabelText(ShowMoreSelector).disabled).toBe(true);
   });
 });

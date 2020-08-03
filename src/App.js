@@ -8,10 +8,12 @@ import { store } from './context/store';
 
 function App() {
   const { state, dispatch } = useContext(store);
+
   const onFilterChange = filter =>
     dispatch({ type: NEWS_WIDGET.FILTER_ARTICLES, filter });
 
   const [page, setPage] = useState(1);
+
   const onLoadMoreArticles = async () => {
     const nextPage = page + 1;
     // todo: handle error case
@@ -52,6 +54,7 @@ function App() {
           articles={state.articles}
           onFilterChange={onFilterChange}
           onLoadMoreArticles={onLoadMoreArticles}
+          isLoading={state.isLoading}
         />
       </header>
     </div>
