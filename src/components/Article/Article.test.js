@@ -13,7 +13,8 @@ describe('Article component', () => {
     const props = {
       title: 'my title',
       date: new Date(),
-      editor: 'editor name'
+      editor: 'editor name',
+      url: 'http://domain/my-url'
     };
     const { container, getByLabelText } = render(<Article {...props} />);
     getByLabelText(articleSelector);

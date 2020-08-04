@@ -63,7 +63,7 @@ function App() {
           onFilterChange={onFilterChange}
           onLoadMoreArticles={onLoadMoreArticles}
           isLoading={state.isLoading}
-          hideShowMore={(state.selectedFilter && true) || false}
+          hideShowMore={!!state.selectedFilter}
         />
       </header>
     </div>
