@@ -19,7 +19,7 @@
 }
 
 .widget--header .widget--header-title {
-  text-decoration: underline;
+  border-bottom: 0.2rem solid;
 }
 
 .widget--footer {
