@@ -1,3 +1,5 @@
+import './Select.css';
+
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -10,6 +12,7 @@ const Select = ({ onChange, options = [], defaultValue, ...props }) =>
   options && options.length ? (
     <select
       aria-label="select"
+      className="select-css"
       onChange={onSelectChange(onChange)}
       defaultValue={defaultValue}
       {...props}>
