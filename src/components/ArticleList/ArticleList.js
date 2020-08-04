@@ -8,13 +8,14 @@ import Article from '../Article/Article';
 const ArticleList = ({ articles = [] }) =>
   articles && articles.length ? (
     <ul aria-label="article-list" className="article-list">
-      {articles.map(({ title, publishedAt, source }, idx) => (
+      {articles.map(({ title, publishedAt, source, url }, idx) => (
         <div key={idx}>
           <li
             aria-label="article-list-item"
             className="article-list--item mt-2">
             <Article
               title={title}
+              url={url}
               date={new Date(publishedAt)}
               editor={source.id || source.name}
             />

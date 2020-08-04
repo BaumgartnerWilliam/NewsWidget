@@ -14,11 +14,15 @@ describe('ArticleList component', () => {
     expect(container).toBeInTheDocument();
   });
 
-  it('should render a list of 5 articles', () => {
+  it('should render a list of 5 articles withLinks', () => {
     const articles = createArticle(5);
     const { getAllByLabelText } = render(<ArticleList articles={articles} />);
 
-    expect(getAllByLabelText(articleListItemSelector).length).toBe(5);
+    const articlesItems = getAllByLabelText(articleListItemSelector);
+    expect(articlesItems.length).toBe(5);
+    articlesItems.forEach((article, idx) => {
+      expect(article.querySelector('a').href).toBe(articles[idx].url);
+    });
   });
 
   it('should print the name of the source if the id is not present', () => {
