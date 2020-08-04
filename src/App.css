@@ -21,7 +21,6 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .App-link {
@@ -46,9 +45,10 @@
 }
 
 .bubble-text {
-  padding: 0 0.6rem;
+  padding: 0.2rem 0.6rem;
   background-color: #343434;
   border-radius: 1rem;
+  color: white;
   -moz-border-radius: 1rem;
   -webkit-border-radius: 1rem;
 }
@@ -71,10 +71,4 @@
 
 .capitalize {
   text-transform: capitalize;
-}
-
-.btn {
-  background: none;
-  color: white;
-  border: 1px solid white;
 }

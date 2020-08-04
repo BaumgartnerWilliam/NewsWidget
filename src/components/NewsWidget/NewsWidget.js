@@ -27,10 +27,11 @@ const NewsWidget = ({
     <Widget.Footer aria-label="news-footer">
       {!hideShowMore && (
         <button
+          style={{ color: '#CF5B82', border: 'solid', background: 'none' }}
           aria-label="load-more-news"
           disabled={isLoading}
           onClick={onLoadMoreArticles}
-          className="btn capitalize p-1">
+          className="capitalize p-1">
           show more
         </button>
       )}

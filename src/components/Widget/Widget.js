@@ -11,7 +11,7 @@ const Widget = ({ children, ...props }) => (
 
 Widget.Header = ({ title, children }) => (
   <div aria-label="widget-header" className="widget--header capitalize">
-    <h3>{title}</h3>
+    <h3 className="widget--header-title">{title}</h3>
     {children}
   </div>
 );

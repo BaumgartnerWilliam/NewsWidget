@@ -1,4 +1,5 @@
 .widget {
+  background: #f8f8f8;
   padding: 0 1rem;
   border: 1px solid white;
   max-width: 60vh;
@@ -11,9 +12,14 @@
 .widget--header {
   flex: 1;
   display: flex;
+  color: #cf5b82;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+}
+
+.widget--header .widget--header-title {
+  text-decoration: underline;
 }
 
 .widget--footer {
@@ -21,4 +27,3 @@
   align-items: flex-start;
   margin-bottom: 2rem;
 }
-
