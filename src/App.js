@@ -5,6 +5,7 @@ import NewsWidget from './components/NewsWidget/NewsWidget';
 import { NEWS_WIDGET } from './constants';
 import { fetchTopHeadLines } from './api';
 import { store } from './context/store';
+// import { createArticle } from './mocks';
 
 function App() {
   const { state, dispatch } = useContext(store);
@@ -35,8 +36,14 @@ function App() {
       dispatch({
         type: NEWS_WIDGET.FETCH_ARTICLES_SUCCES,
         data: articles
+        // data: createArticle(5)
       });
     });
+
+    // dispatch({
+    //   type: NEWS_WIDGET.FETCH_ARTICLES_SUCCES,
+    //   data: createArticle(5)
+    // });
   }, [dispatch]);
 
   useEffect(onPageLoad, [dispatch]);
