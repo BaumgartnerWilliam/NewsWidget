@@ -51,7 +51,7 @@ function App() {
   const filterOptions = Object.values(state.filters || {});
   const defaultFilter = {
     value: '',
-    text: 'filter by something'
+    text: 'filter by source'
   };
 
   return (

@@ -12,7 +12,7 @@ const Select = ({ onChange, options = [], defaultValue, ...props }) =>
   options && options.length ? (
     <select
       aria-label="select"
-      className="select-css"
+      className="select-css capitalize"
       onChange={onSelectChange(onChange)}
       defaultValue={defaultValue}
       {...props}>
